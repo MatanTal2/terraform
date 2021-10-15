@@ -18,7 +18,7 @@ resource "azurerm_subnet" "public" {
 resource "azurerm_network_security_group" "public_Access" {
   name                = var.public_NSG_name
   location            = var.cloud_location
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = var.rg_name
 
   security_rule {
     name                       = "port_8080"
@@ -32,4 +32,10 @@ resource "azurerm_network_security_group" "public_Access" {
     destination_address_prefix = "*"
   }
   
+}
+# =============== Subnet Public NSG association ===============
+
+resource "azurerm_subnet_network_security_group_association" "to_public" {
+  subnet_id                 = azurerm_subnet.public.id
+  network_security_group_id = azurerm_network_security_group.public_Access.id
 }
