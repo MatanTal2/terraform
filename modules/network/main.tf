@@ -67,3 +67,8 @@ resource "azurerm_network_security_group" "database_access" {
   }
 }
 
+# =============== private subnet  NSG association ===============
+resource "azurerm_subnet_network_security_group_association" "to_private" {
+  subnet_id                 = azurerm_subnet.private.id
+  network_security_group_id = azurerm_network_security_group.database_access.id
+}
