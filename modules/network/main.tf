@@ -48,4 +48,22 @@ resource "azurerm_subnet" "private" {
   virtual_network_name = azurerm_virtual_network.weight_tracker_VNet.name
 }
 
+# =============== NSG for database ===============
+resource "azurerm_network_security_group" "database_access" {
+  name                = var.private_NSG_name
+  location            = var.cloud_location
+  resource_group_name = var.rg_name
+
+  security_rule {
+    name                       = "postgres"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "5432"
+    source_address_prefix      = element(var.public_subnet_CIDR, 0)
+    destination_address_prefix = "*"
+  }
+}
 
