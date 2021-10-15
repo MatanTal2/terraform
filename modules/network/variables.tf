@@ -32,7 +32,20 @@ variable "public_subnet_name" {
   type        = string
   description = "public subnet name"
 }
+variable "private_subnet_name" {
+  type        = string
+  description = "private subnet name"
+}
+variable "private_subnet_CIDR" {
+  type        = list(string)
+  description = "private subnet addr prefixs"
+}
+# NSG
 variable "public_NSG_name" {
   type        = string
   description = "Public NSG name"
+}
+variable "private_NSG_name" {
+  type        = string
+  description = "private NSG name"
 }

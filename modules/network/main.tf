@@ -48,3 +48,4 @@ resource "azurerm_subnet" "private" {
   virtual_network_name = azurerm_virtual_network.weight_tracker_VNet.name
 }
 
+
