@@ -39,3 +39,12 @@ resource "azurerm_subnet_network_security_group_association" "to_public" {
   subnet_id                 = azurerm_subnet.public.id
   network_security_group_id = azurerm_network_security_group.public_Access.id
 }
+
+# =============== Subnet Private ===============
+resource "azurerm_subnet" "private" {
+  name                 = var.private_subnet_name
+  address_prefixes     = var.private_subnet_CIDR
+  resource_group_name  = var.rg_name
+  virtual_network_name = azurerm_virtual_network.weight_tracker_VNet.name
+}
+
