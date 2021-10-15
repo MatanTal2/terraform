@@ -49,3 +49,8 @@ variable "private_NSG_name" {
   type        = string
   description = "private NSG name"
 }
+# public IP
+variable "public_ip_to_front_LB_name" {
+  type = string
+  description = "public IP to front load balancer"
+}

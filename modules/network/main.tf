@@ -72,3 +72,11 @@ resource "azurerm_subnet_network_security_group_association" "to_private" {
   subnet_id                 = azurerm_subnet.private.id
   network_security_group_id = azurerm_network_security_group.database_access.id
 }
+
+# =============== Public IP ===============
+resource "azurerm_public_ip" "to_front_lb" {
+  name                = var.public_ip_to_front_LB_name
+  location            = var.cloud_location
+  resource_group_name = var.rg_name
+  allocation_method   = "Static"
+}
