@@ -89,3 +89,15 @@ resource "azurerm_availability_set" "website" {
 
   tags = var.instance_tags
 }
+
+# =============== NIC VMs ===============
+resource "azurerm_network_interface" "web_server" {
+  name                = "VM_NIC"
+  location            = var.cloud_location
+  resource_group_name = var.rg_name
+  ip_configuration {
+    name                          = "internal_"
+    subnet_id                     = azurerm_subnet.public.id
+    private_ip_address_allocation = "dynamic"
+  }
+}
