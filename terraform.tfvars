@@ -13,3 +13,5 @@ public_subnet_CIDR   = ["10.0.2.0/24"]
 public_subnet_name   = "public"
 private_subnet_CIDR  = ["10.0.1.0/24"]
 private_subnet_name  = "private"
+# NSG
+public_NSG_name      = "webAppNSG"
