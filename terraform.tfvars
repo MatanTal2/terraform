@@ -15,3 +15,8 @@ private_subnet_CIDR  = ["10.0.1.0/24"]
 private_subnet_name  = "private"
 # NSG
 public_NSG_name      = "webAppNSG"
+private_NSG_name     = "postgresqlNSG"
+# load balancer
+public_ip_to_front_LB_name = "PublicIPForLB"
+ava_set_name = "ASfront"
+nic_database_name = "VMdatabasenic"

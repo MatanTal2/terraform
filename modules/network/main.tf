@@ -80,3 +80,12 @@ resource "azurerm_public_ip" "to_front_lb" {
   resource_group_name = var.rg_name
   allocation_method   = "Static"
 }
+
+# =============== Availabilty Set ===============
+resource "azurerm_availability_set" "website" {
+  name                = var.ava_set_name
+  location            = var.cloud_location
+  resource_group_name = var.rg_name
+
+  tags = var.instance_tags
+}
