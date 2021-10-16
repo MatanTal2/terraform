@@ -105,19 +105,19 @@ resource "azurerm_network_interface" "web_server" {
 }
 
 # =============== NIC database VMs ===============
-# resource "azurerm_network_interface" "database" {
-#   name                = "database_VM_NIC"
-#   location            = var.cloud_location
-#   resource_group_name = var.rg_name
-#   ip_configuration {
-#     name                          = "internal_database"
-#     subnet_id                     = azurerm_subnet.private.id
-#     private_ip_address_allocation = "dynamic"
-#   }
-# }
+resource "azurerm_network_interface" "database" {
+  name                = "database_VM_NIC"
+  location            = var.cloud_location
+  resource_group_name = var.rg_name
+  ip_configuration {
+    name                          = "internal_database"
+    subnet_id                     = azurerm_subnet.private.id
+    private_ip_address_allocation = "dynamic"
+  }
+}
 
 # =============== Load balancer ===============
-resource "azurerm_lb" "example" {
+resource "azurerm_lb" "frontend" {
   name                = "TestLoadBalancer"
   location            = var.cloud_location
   resource_group_name = var.rg_name
@@ -127,4 +127,11 @@ resource "azurerm_lb" "example" {
     public_ip_address_id = azurerm_public_ip.to_front_lb.id
     
   }
+}
+
+
+# =============== backend poolfor LB ===============
+resource "azurerm_lb_backend_address_pool" "for_websits" {
+  loadbalancer_id = azurerm_lb.frontend.id
+  name            = "BackEndAddressPool"
 }
