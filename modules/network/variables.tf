@@ -51,11 +51,11 @@ variable "private_NSG_name" {
 }
 # public IP
 variable "public_ip_to_front_LB_name" {
-  type = string
+  type        = string
   description = "public IP to front load balancer"
 }
 # availabilty set
 variable "ava_set_name" {
-  type = string
+  type        = string
   description = "availability set name"
 }

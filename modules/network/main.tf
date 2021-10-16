@@ -4,7 +4,6 @@ resource "azurerm_virtual_network" "weight_tracker_VNet" {
   resource_group_name = var.rg_name
   location            = var.cloud_location
   address_space       = var.virtual_network_CIDR
-  # tags                = var.instances_tags
 }
 
 # =============== Subnet Public ===============
@@ -86,21 +85,36 @@ resource "azurerm_availability_set" "website" {
   name                = var.ava_set_name
   location            = var.cloud_location
   resource_group_name = var.rg_name
-
-  tags = var.instance_tags
+  platform_fault_domain_count = 2
+  platform_update_domain_count = 3
+  
+  tags = var.instances_tags
 }
 
-# =============== NIC VMs ===============
+# =============== NIC web VMs ===============
 resource "azurerm_network_interface" "web_server" {
-  name                = "VM_NIC"
+  count = 3
+  name                = "VM_NIC_${count.index}"
   location            = var.cloud_location
   resource_group_name = var.rg_name
   ip_configuration {
-    name                          = "internal_"
+    name                          = "internal_${count.index}"
     subnet_id                     = azurerm_subnet.public.id
     private_ip_address_allocation = "dynamic"
   }
 }
+
+# =============== NIC database VMs ===============
+# resource "azurerm_network_interface" "database" {
+#   name                = "database_VM_NIC"
+#   location            = var.cloud_location
+#   resource_group_name = var.rg_name
+#   ip_configuration {
+#     name                          = "internal_database"
+#     subnet_id                     = azurerm_subnet.private.id
+#     private_ip_address_allocation = "dynamic"
+#   }
+# }
 
 # =============== Load balancer ===============
 resource "azurerm_lb" "example" {

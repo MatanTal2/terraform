@@ -7,53 +7,58 @@ variable "cloud_location" {
   description = "resource location"
 }
 
+variable "VM_name" {
+  type        = string
+  description = "vm name"
+}
+
 variable "vm_size" {
-  type = string
+  type        = string
   description = "virtual machine size"
 }
 variable "user_name" {
-  type = string
+  type        = string
   description = "User name"
-  default = "username"
 }
 
 # disk
 variable "disk_caching" {
-  type = string
+  type        = string
   description = "Disk caching"
 }
 variable "disk_storage_account_type" {
-  type = string
+  type        = string
   description = "Disk storage account type"
 }
 variable "admin_pass" {
-  type = string
+  type        = string
   description = "User password"
 }
 
 # source image reference
 variable "os_source_image_publisher" {
-  type = string
+  type        = string
   description = "image publisher"
 }
 variable "os_source_image_sku" {
-  type = string
+  type        = string
   description = "image sku"
 }
 variable "os_source_image_offer" {
-  type = string
+  type        = string
   description = "image offer"
 }
 variable "os_source_image_version" {
-  type = string
+  type        = string
   description = "image version"
 }
 variable "availability_id" {
   description = "availability id"
 }
 variable "disable_password_auth" {
-  type = bool
+  type        = bool
   description = "disable_password_authentication"
 }
 variable "nic_id" {
+  description = "nic id"
 }
