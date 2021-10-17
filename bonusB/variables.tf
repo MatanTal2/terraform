@@ -60,48 +60,8 @@ variable "ava_set_name" {
   description = "availability set name"
 }
 
-# variable "vmSize" {
-#   type        = string
-#   description = "virtual machine size"
-# }
-# variable "user_name" {
-#   type        = string
-#   description = "User name"
-#   default     = "username"
-# }
 
-# # disk
-# variable "disk_caching" {
-#   type        = string
-#   description = "Disk caching"
-# }
-# variable "disk_storage_account_type" {
-#   type        = string
-#   description = "Disk storage account type"
-# }
 variable "admin_pass" {
   type        = string
   description = "User password"
 }
-
-# # source image reference
-# variable "os_source_image_publisher" {
-#   type        = string
-#   description = "image publisher"
-# }
-# variable "os_source_image_sku" {
-#   type        = string
-#   description = "image sku"
-# }
-# variable "os_source_image_offer" {
-#   type        = string
-#   description = "image offer"
-# }
-# variable "os_source_image_version" {
-#   type        = string
-#   description = "image version"
-# }
-# variable "disable_password_auth" {
-#   type        = bool
-#   description = "disable_password_authentication"
-# }
