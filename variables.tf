@@ -79,10 +79,10 @@ variable "ava_set_name" {
 #   type        = string
 #   description = "Disk storage account type"
 # }
-# variable "admin_pass" {
-#   type        = string
-#   description = "User password"
-# }
+variable "admin_pass" {
+  type        = string
+  description = "User password"
+}
 
 # # source image reference
 # variable "os_source_image_publisher" {

@@ -27,7 +27,7 @@ ava_set_name               = "ASfront"
 # VM modul
 # VM_size    = "Standard_B2"
 # user_name  = "matantal"
-# admin_pass = "password"
+# admin_pass = "M28Y23tal"
 # disk
 # disk_caching              = "ReadWrite"
 # disk_storage_account_type = "Standard_LRS"
