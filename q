@@ -1,0 +1,125 @@
+[33mcommit c96e1aeeeb4866755de3a8878805c9398af8d9bd[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/netmodule[m[33m, [m[1;32mnetmodule[m[33m)[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Sun Oct 17 15:23:42 2021 +0300
+
+    create bonus directory app is runnig
+
+[33mcommit c71afffe365dbf6542a6d513a6aa72036b055e1d[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Sun Oct 17 14:38:44 2021 +0300
+
+    add backend file, add output to the admin password
+
+[33mcommit 0bdcf04765d3f71059d02e70a3dac5766199e105[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Sun Oct 17 10:36:22 2021 +0300
+
+    add backend pool, associate with the NIC, add health probe and fix bugs
+
+[33mcommit 6838148e09e343cb579cf799c812109a2f7ceb25[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Sun Oct 17 01:49:52 2021 +0300
+
+    add resource: bakend pool for LB
+
+[33mcommit 52a20bc0034406b5f8f8fc718b44c4dbc9df10cc[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Sun Oct 17 01:46:16 2021 +0300
+
+    create the modules for the VM, fix bugs.
+
+[33mcommit 44eb4b13ef1082a22d85084651a7917f464ab761[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Fri Oct 15 13:24:02 2021 +0300
+
+    add resource: Virtual machine module
+
+[33mcommit 3ca961dfcace8cdd1b37d46b530d71fd4a861a78[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Fri Oct 15 13:16:33 2021 +0300
+
+    edit readme
+
+[33mcommit 7aa4dd2adb99998136ea7486ddc222fcab289b46[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Fri Oct 15 13:14:56 2021 +0300
+
+    add resource: NIC for the web app
+
+[33mcommit bdf08e64243e37fbbfe95ca9ff56592691ba0782[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Fri Oct 15 13:13:27 2021 +0300
+
+    add resource: availabilty set for the load balancer
+
+[33mcommit e552cee005554d776b9c83df91f0ce8ae8f97bb5[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Fri Oct 15 13:11:51 2021 +0300
+
+    add resource: public IP, for the Load balancer
+
+[33mcommit e49af2a06740f1b58013f30d139fdccd26e6b09a[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Fri Oct 15 13:10:15 2021 +0300
+
+    associate the NSG to the private-database subnet
+
+[33mcommit 4eb674bde8842e7af8c0f1f31e6993accab9442b[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Fri Oct 15 13:09:35 2021 +0300
+
+    add resource NSG pribate for database
+
+[33mcommit 92d0e0872c2c9f9c122880fc399e18ea03aa563e[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Fri Oct 15 13:08:51 2021 +0300
+
+    private subnet variables
+
+[33mcommit 07073bb1fe390c63ff6b348e807e06f166cf5adb[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Fri Oct 15 13:06:50 2021 +0300
+
+    add resource: private subnet
+
+[33mcommit c61b8c20881729070e411e7e19f3dca581c3bb06[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Fri Oct 15 13:05:33 2021 +0300
+
+    associate the NSG to the public subnet
+
+[33mcommit 1c46cb192b83a679dd357f9c6473e5b0346a10f5[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Fri Oct 15 13:04:21 2021 +0300
+
+    add resource NSG public
+
+[33mcommit e11655157d72d783e1f2631b782ffb658aa13451[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Fri Oct 15 13:02:47 2021 +0300
+
+    add resource: public subnet
+
+[33mcommit 77a08c34f3d811c2b16f6fce56a5cb2a4ca39164[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Fri Oct 15 12:56:17 2021 +0300
+
+    add resource: virtual network and his variables
+
+[33mcommit 40dbf5166e7e71841e9dc980542d08e1a890a9c4[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Fri Oct 15 12:50:11 2021 +0300
+
+    add azurerm provider, resource group and his variables
+
+[33mcommit c1ba4aaaa133533904e326f3561dfb76989536d6[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Fri Oct 15 11:50:30 2021 +0300
+
+    directory structure
+
+[33mcommit 980376069522a9df8d89df87b71bc52329a5816f[m
+Author: Matan Tal <matantal2@gmail.com>
+Date:   Fri Oct 15 11:25:39 2021 +0300
+
+    first commit
