@@ -45,7 +45,7 @@ module "virtual_machines" {
   cloud_location        = azurerm_resource_group.rg.location
   vm_size               = "Standard_B2ms"
   user_name             = "matantal"
-  admin_pass            = "M28Y23tal"
+  admin_pass            = var.admin_pass
   disable_password_auth = false
   nic_id                = [element(module.net.nic_id, count.index)]
   availability_id       = module.net.availabilty_set_id
@@ -71,7 +71,7 @@ module "database" {
   cloud_location        = azurerm_resource_group.rg.location
   vm_size               = "Standard_B2ms"
   user_name             = "matantal"
-  admin_pass            = "M28Y23tal"
+  admin_pass            = var.admin_pass
   disable_password_auth = false
   nic_id                = module.net.database_nic_id
   availability_id       = null

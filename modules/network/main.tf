@@ -91,7 +91,7 @@ resource "azurerm_public_ip" "to_front_lb" {
 }
 
 resource "azurerm_public_ip" "to_web" {
-  count = 3
+  count               = 3
   name                = "web-${count.index}"
   location            = var.cloud_location
   resource_group_name = var.rg_name
@@ -178,7 +178,7 @@ resource "azurerm_lb_rule" "port_22" {
 
 # by connecting the NICs VMs we associate the VM to the backend pool
 resource "azurerm_network_interface_backend_address_pool_association" "web_vms" {
-  count = 3
+  count                   = 3
   network_interface_id    = azurerm_network_interface.web_server[count.index].id
   ip_configuration_name   = "testconfiguration"
   backend_address_pool_id = azurerm_lb_backend_address_pool.for_websits.id
