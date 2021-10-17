@@ -10,8 +10,8 @@ module "net" {
   instances_tags = var.instances_tags
   # VNet
   virtual_network_name = "webAppVNet"
-  rg_name = azurerm_resource_group.rg.name
-  cloud_location = azurerm_resource_group.rg.location
+  rg_name              = azurerm_resource_group.rg.name
+  cloud_location       = azurerm_resource_group.rg.location
   virtual_network_CIDR = var.virtual_network_CIDR
 
   # public subnet
@@ -38,21 +38,21 @@ module "net" {
 
 # create the virtual machine
 module "virtual_machines" {
-  source = "./modules/vm"
-  count = 3
-  VM_name = "vm-${count.index}"
-  rg_name = azurerm_resource_group.rg.name
-  cloud_location = azurerm_resource_group.rg.location
-  vm_size = "Standard_B2ms"
-  user_name= "matantal"
-  admin_pass = "M28Y23tal"
+  source                = "./modules/vm"
+  count                 = 3
+  VM_name               = "vm-${count.index}"
+  rg_name               = azurerm_resource_group.rg.name
+  cloud_location        = azurerm_resource_group.rg.location
+  vm_size               = "Standard_B2ms"
+  user_name             = "matantal"
+  admin_pass            = "M28Y23tal"
   disable_password_auth = false
-  nic_id =  [element(module.net.nic_id, count.index)]
-  availability_id = module.net.availabilty_set_id
+  nic_id                = [element(module.net.nic_id, count.index)]
+  availability_id       = module.net.availabilty_set_id
 
 
   # OS_disk
-  disk_caching = "ReadWrite"
+  disk_caching              = "ReadWrite"
   disk_storage_account_type = "Standard_LRS"
 
   # source_image_reference
@@ -60,25 +60,25 @@ module "virtual_machines" {
   os_source_image_offer     = "UbuntuServer"
   os_source_image_sku       = "18.04-LTS"
   os_source_image_version   = "latest"
-  
+
 }
 
-module "virtual_machines" {
+module "database" {
   source = "./modules/vm"
-  
-  VM_name = "vm-database"
-  rg_name = azurerm_resource_group.rg.name
-  cloud_location = azurerm_resource_group.rg.location
-  vm_size = "Standard_B2ms"
-  user_name= "matantal"
-  admin_pass = "M28Y23tal"
+
+  VM_name               = "vm-database"
+  rg_name               = azurerm_resource_group.rg.name
+  cloud_location        = azurerm_resource_group.rg.location
+  vm_size               = "Standard_B2ms"
+  user_name             = "matantal"
+  admin_pass            = "M28Y23tal"
   disable_password_auth = false
-  nic_id =  module.net.nic_id
-  availability_id = module.net.availabilty_set_id
+  nic_id                = module.net.database_nic_id
+  availability_id       = null
 
 
   # OS_disk
-  disk_caching = "ReadWrite"
+  disk_caching              = "ReadWrite"
   disk_storage_account_type = "Standard_LRS"
 
   # source_image_reference
@@ -86,5 +86,5 @@ module "virtual_machines" {
   os_source_image_offer     = "UbuntuServer"
   os_source_image_sku       = "18.04-LTS"
   os_source_image_version   = "latest"
-  
+
 }

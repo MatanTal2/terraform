@@ -30,7 +30,17 @@ resource "azurerm_network_security_group" "public_Access" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-  
+  security_rule {
+    name                       = "port_22"
+    priority                   = 300
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
 }
 # =============== Subnet Public NSG association ===============
 
@@ -80,20 +90,27 @@ resource "azurerm_public_ip" "to_front_lb" {
   allocation_method   = "Static"
 }
 
-# =============== Availabilty Set ===============
-resource "azurerm_availability_set" "website" {
-  name                = var.ava_set_name
+resource "azurerm_public_ip" "to_web" {
+  count = 3
+  name                = "web-${count.index}"
   location            = var.cloud_location
   resource_group_name = var.rg_name
-  platform_fault_domain_count = 2
+  allocation_method   = "Static"
+}
+# =============== Availabilty Set ===============
+resource "azurerm_availability_set" "website" {
+  name                         = var.ava_set_name
+  location                     = var.cloud_location
+  resource_group_name          = var.rg_name
+  platform_fault_domain_count  = 2
   platform_update_domain_count = 3
-  
+
   tags = var.instances_tags
 }
 
 # =============== NIC web VMs ===============
 resource "azurerm_network_interface" "web_server" {
-  count = 3
+  count               = 3
   name                = "VM_NIC_${count.index}"
   location            = var.cloud_location
   resource_group_name = var.rg_name
@@ -101,6 +118,7 @@ resource "azurerm_network_interface" "web_server" {
     name                          = "internal_${count.index}"
     subnet_id                     = azurerm_subnet.public.id
     private_ip_address_allocation = "dynamic"
+    public_ip_address_id          = azurerm_public_ip.to_web[count.index].id
   }
 }
 
@@ -125,7 +143,7 @@ resource "azurerm_lb" "frontend" {
   frontend_ip_configuration {
     name                 = "PublicIPAddress"
     public_ip_address_id = azurerm_public_ip.to_front_lb.id
-    
+
   }
 }
 
@@ -134,4 +152,51 @@ resource "azurerm_lb" "frontend" {
 resource "azurerm_lb_backend_address_pool" "for_websits" {
   loadbalancer_id = azurerm_lb.frontend.id
   name            = "BackEndAddressPool"
+}
+
+# =============== LB rule ===============
+resource "azurerm_lb_rule" "port_8080" {
+  resource_group_name            = var.rg_name
+  loadbalancer_id                = azurerm_lb.frontend.id
+  name                           = "LBRule"
+  protocol                       = "Tcp"
+  frontend_port                  = 8080
+  backend_port                   = 8080
+  frontend_ip_configuration_name = "PublicIPAddress"
+  backend_address_pool_id        = azurerm_lb_backend_address_pool.for_websits.id
+}
+resource "azurerm_lb_rule" "port_22" {
+  resource_group_name            = var.rg_name
+  loadbalancer_id                = azurerm_lb.frontend.id
+  name                           = "SSH"
+  protocol                       = "Tcp"
+  frontend_port                  = 22
+  backend_port                   = 22
+  frontend_ip_configuration_name = "PublicIPAddress"
+  backend_address_pool_id        = azurerm_lb_backend_address_pool.for_websits.id
+}
+
+# by connecting the NICs VMs we associate the VM to the backend pool
+resource "azurerm_network_interface_backend_address_pool_association" "web_vms" {
+  count = 3
+  network_interface_id    = azurerm_network_interface.web_server[count.index].id
+  ip_configuration_name   = "testconfiguration"
+  backend_address_pool_id = azurerm_lb_backend_address_pool.for_websits.id
+  depends_on = [
+    azurerm_network_interface.web_server
+  ]
+}
+
+# =============== health probe ===============
+resource "azurerm_lb_probe" "ssh_22" {
+  resource_group_name = var.rg_name
+  loadbalancer_id     = azurerm_lb.frontend.id
+  name                = "ssh-running-probe"
+  port                = 22
+}
+resource "azurerm_lb_probe" "web_8080" {
+  resource_group_name = var.rg_name
+  loadbalancer_id     = azurerm_lb.frontend.id
+  name                = "entree-running-probe"
+  port                = 8080
 }
